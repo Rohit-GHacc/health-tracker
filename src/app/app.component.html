@@ -1,19 +1,32 @@
 <div class="min-h-screen bg-gray-100">
   <header class="bg-white shadow">
     <div class="max-w-7xl mx-auto py-6 px-4">
-      <h1 class="text-3xl font-bold text-gray-900">
-        {{ title }}
-      </h1>
+      <div class="flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-gray-900">
+          {{ title }}
+        </h1>
+        <button 
+          mat-raised-button 
+          color="primary" 
+          (click)="openDialog()"
+          aria-label="Add new user">
+          Add User
+        </button>
+      </div>
     </div>
   </header>
 
   <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
     <mat-tab-group>
-      <mat-tab label="Users">
-        <!-- Users component will go here -->
+      <mat-tab label="All Users Workout List">
+        <div class="flex-col space-x-10 pt-6">
+          <!-- Users component will go here -->
+        </div>
       </mat-tab>
-      <mat-tab label="Progress">
-        <!-- Progress chart will go here -->
+      <mat-tab label="Workout Progress">
+        <div class="flex-col space-x-10 pt-6">
+          <!-- Progress chart will go here -->
+        </div>
       </mat-tab>
     </mat-tab-group>
   </main>
