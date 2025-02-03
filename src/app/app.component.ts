@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
 import { AddUserComponent } from './components/add-user/add-user.component';
@@ -11,11 +11,10 @@ import { UsersComponent } from './components/users/users.component';
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     CommonModule,
     MatTabsModule,
     MatButtonModule,
-    AddUserComponent,
+    MatDialogModule,
     UsersComponent
   ],
   templateUrl: './app.component.html',
@@ -26,15 +25,6 @@ export class AppComponent {
 
   constructor(private dialog: MatDialog) {}
 
-  ngOnInit() {
-    this.initializeLocalStorage();
-  }
-
-  initializeLocalStorage() {
-    if (!localStorage.getItem('workoutData')) {
-      localStorage.setItem('workoutData', JSON.stringify([]));
-    }
-  }
   openDialog(): void {
     const dialogRef = this.dialog.open(AddUserComponent, {
       width: '500px',
@@ -42,7 +32,7 @@ export class AppComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // We'll handle user list refresh later
+        window.location.reload();  // Simple refresh to update the list
       }
     });
   }

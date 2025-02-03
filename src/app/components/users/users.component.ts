@@ -24,45 +24,23 @@ interface User {
   styleUrl: './users.component.css'
 })
 export class UsersComponent implements OnInit {
+  displayedColumns: string[] = ['name', 'workouts', 'minutes'];
   users: User[] = [];
-  displayedColumns: string[] = ['name', 'workouts', 'goal', 'progress', 'actions'];
 
   ngOnInit() {
     this.loadUsers();
   }
 
   loadUsers() {
-    const data = localStorage.getItem('workoutData');
-    if (data) {
-      this.users = JSON.parse(data);
-    }
-  }
-
-  incrementWorkout(user: User) {
-    const updatedUsers = this.users.map(u => {
-      if (u.id === user.id) {
-        return { ...u, workouts: u.workouts + 1 };
-      }
-      return u;
-    });
-    localStorage.setItem('workoutData', JSON.stringify(updatedUsers));
-    this.loadUsers();
-  }
-
-  decrementWorkout(user: User) {
-    if (user.workouts > 0) {
-      const updatedUsers = this.users.map(u => {
-        if (u.id === user.id) {
-          return { ...u, workouts: u.workouts - 1 };
+    try {
+      if (typeof window !== 'undefined') {  // Add this check
+        const data = localStorage.getItem('workoutData');
+        if (data) {
+          this.users = JSON.parse(data);
         }
-        return u;
-      });
-      localStorage.setItem('workoutData', JSON.stringify(updatedUsers));
-      this.loadUsers();
+      }
+    } catch (error) {
+      console.error('Error loading users:', error);
     }
-  }
-
-  calculateProgress(workouts: number, goal: number): number {
-    return Math.round((workouts / goal) * 100);
   }
 }

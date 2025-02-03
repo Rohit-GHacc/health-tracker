@@ -1,50 +1,50 @@
 <div class="p-6">
-    <h2 class="text-xl font-semibold mb-4" id="dialog-title">Add New User</h2>
-    
-    <form (ngSubmit)="onSubmit()" class="space-y-4" aria-labelledby="dialog-title">
-      <mat-form-field class="w-full">
-        <mat-label>Name</mat-label>
-        <input 
-          matInput 
-          [(ngModel)]="userData.name" 
-          name="name" 
-          required
-          placeholder="Enter user name"
-          aria-label="User name"
-          [attr.aria-required]="true">
-        <mat-hint>Enter the user's full name</mat-hint>
-      </mat-form-field>
-  
-      <mat-form-field class="w-full">
-        <mat-label>Workout Goal</mat-label>
-        <input 
-          matInput 
-          type="number" 
-          [(ngModel)]="userData.goal" 
-          name="goal" 
-          required
-          placeholder="Enter workout goal"
-          aria-label="Workout goal"
-          [attr.aria-required]="true"
-          min="1">
-        <mat-hint>Enter the number of workouts to achieve</mat-hint>
-      </mat-form-field>
-  
-      <div class="flex justify-end space-x-2">
-        <button 
-          mat-button 
-          type="button" 
-          (click)="onCancel()"
-          aria-label="Cancel adding new user">
-          Cancel
-        </button>
-        <button 
-          mat-raised-button 
-          color="primary" 
-          type="submit"
-          aria-label="Add new user">
-          Add User
-        </button>
-      </div>
-    </form>
-  </div>
+  <h2 class="text-xl font-semibold mb-4">Add New User</h2>
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="space-y-4">
+    <mat-form-field class="w-full">
+      <mat-label for="name">Name</mat-label>
+      <input 
+        matInput 
+        [(ngModel)]="userData.name" 
+        name="name"
+        id="name"
+        aria-label="Enter user name"
+        placeholder="Enter name"
+        required>
+      <mat-error *ngIf="userForm.form.get('name')?.invalid">Name is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label for="goal">Total Workout Minutes</mat-label>
+      <input 
+        matInput 
+        type="number" 
+        [(ngModel)]="userData.goal" 
+        name="goal"
+        id="goal"
+        aria-label="Enter workout minutes"
+        placeholder="Enter minutes"
+        required 
+        min="1">
+      <mat-error *ngIf="userForm.form.get('goal')?.invalid">Minutes must be at least 1</mat-error>
+    </mat-form-field>
+
+    <div class="flex justify-end space-x-2">
+      <button 
+        mat-button 
+        type="button" 
+        (click)="onCancel()"
+        aria-label="Cancel adding user">
+        Cancel
+      </button>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        type="submit" 
+        [disabled]="!userForm.form.valid"
+        aria-label="Add new user">
+        Add User
+      </button>
+    </div>
+  </form>
+</div>
