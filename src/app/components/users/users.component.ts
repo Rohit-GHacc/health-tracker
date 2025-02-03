@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator'; // Add MatPaginator
+import { MatTableDataSource } from '@angular/material/table'; // Add MatTableDataSource
+
 interface User {
   id: string;
   name: string;
@@ -20,17 +23,22 @@ interface User {
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatPaginator, // Add MatPaginator here
   ],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+  styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['name', 'workouts', 'minutes', 'workoutType'];
   users: User[] = [];
   filteredUsers: User[] = [];
+  dataSource = new MatTableDataSource<User>(); // Use MatTableDataSource for pagination
   searchTerm: string = ''; // This will hold the search term
   selectedWorkout: string = '';
+
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined; // ViewChild to get paginator
+
   ngOnInit() {
     this.loadUsers();
   }
@@ -44,7 +52,7 @@ export class UsersComponent implements OnInit {
             ...user,
             workoutType: Array.isArray(user.workoutType) ? user.workoutType : [user.workoutType]
           }));
-          this.filteredUsers = this.users
+          this.applyFilter();  // Apply filter initially
         }
       }
     } catch (error) {
@@ -69,8 +77,12 @@ export class UsersComponent implements OnInit {
       );
     }
 
-    // Update the filtered users
+    // Update filteredUsers and dataSource
     this.filteredUsers = filtered;
+    this.dataSource.data = filtered; // Set the filtered data into the dataSource
+
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator; // Assign paginator to dataSource
+    }
   }
-  
 }

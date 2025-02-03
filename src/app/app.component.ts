@@ -7,7 +7,6 @@ import { AddUserComponent } from './components/add-user/add-user.component';
 import { MatButtonModule } from '@angular/material/button';
 import { UsersComponent } from './components/users/users.component';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +17,7 @@ import { NgModule } from '@angular/core';
     MatButtonModule,
     MatDialogModule,
     UsersComponent,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
