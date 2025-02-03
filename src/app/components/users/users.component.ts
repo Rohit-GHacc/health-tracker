@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   filteredUsers: User[] = [];
   searchTerm: string = ''; // This will hold the search term
-
+  selectedWorkout: string = '';
   ngOnInit() {
     this.loadUsers();
   }
@@ -53,13 +53,24 @@ export class UsersComponent implements OnInit {
   }
 
   applyFilter() {
-    if (this.searchTerm.trim() === '') {
-      this.filteredUsers = this.users; // If no search term, show all users
-    } else {
-      this.filteredUsers = this.users.filter(user =>
+    let filtered = this.users;
+
+    // Filter by username
+    if (this.searchTerm.trim()) {
+      filtered = filtered.filter(user =>
         user.name.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
+
+    // Filter by workout type
+    if (this.selectedWorkout) {
+      filtered = filtered.filter(user =>
+        user.workoutType.some(type => type.toLowerCase() === this.selectedWorkout.toLowerCase())
+      );
+    }
+
+    // Update the filtered users
+    this.filteredUsers = filtered;
   }
   
 }
