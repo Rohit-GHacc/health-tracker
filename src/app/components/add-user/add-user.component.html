@@ -29,6 +29,23 @@
       <mat-error *ngIf="userForm.form.get('goal')?.invalid">Minutes must be at least 1</mat-error>
     </mat-form-field>
 
+    <mat-form-field class="w-full">
+      <mat-label for="workoutType">Preferred Workout Type</mat-label>
+      <mat-select 
+        id="workoutType" 
+        [(ngModel)]="userData.workoutType" 
+        name="workoutType"
+        required>
+        <mat-option value="">Select workout type</mat-option>
+        <mat-option value="yoga">Yoga</mat-option>
+        <mat-option value="cycling">Cycling</mat-option>
+        <mat-option value="running">Running</mat-option>
+        <mat-option value="swimming">Swimming</mat-option>
+        <mat-option value="weightlifting">Weightlifting</mat-option>
+      </mat-select>
+      <mat-error *ngIf="userForm.form.get('workoutType')?.invalid">Workout type is required</mat-error>
+    </mat-form-field>
+
     <div class="flex justify-end space-x-2">
       <button 
         mat-button 

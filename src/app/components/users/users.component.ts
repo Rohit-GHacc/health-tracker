@@ -9,6 +9,7 @@ interface User {
   name: string;
   workouts: number;
   goal: number;
+  workoutType: string[];
 }
 
 @Component({
@@ -24,7 +25,7 @@ interface User {
   styleUrl: './users.component.css'
 })
 export class UsersComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'workouts', 'minutes'];
+  displayedColumns: string[] = ['name', 'workouts', 'minutes', 'workoutType'];
   users: User[] = [];
 
   ngOnInit() {
@@ -33,14 +34,18 @@ export class UsersComponent implements OnInit {
 
   loadUsers() {
     try {
-      if (typeof window !== 'undefined') {  // Add this check
+      if (typeof window !== 'undefined') {
         const data = localStorage.getItem('workoutData');
         if (data) {
-          this.users = JSON.parse(data);
+          this.users = JSON.parse(data).map((user: any) => ({
+            ...user,
+            workoutType: Array.isArray(user.workoutType) ? user.workoutType : [user.workoutType]
+          }));
         }
       }
     } catch (error) {
       console.error('Error loading users:', error);
     }
   }
+  
 }
