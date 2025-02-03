@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,7 +29,7 @@ interface User {
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'workouts', 'minutes', 'workoutType'];
   users: User[] = [];
   filteredUsers: User[] = [];
@@ -37,10 +37,18 @@ export class UsersComponent implements OnInit {
   searchTerm: string = ''; // This will hold the search term
   selectedWorkout: string = '';
 
+  
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined; // ViewChild to get paginator
-
   ngOnInit() {
+    // this.applyFilter()
+    
     this.loadUsers();
+  }
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.paginator.pageSize = 5; // Set the page size to 5 after view initialization
+      this.dataSource.paginator = this.paginator; // Assign paginator to dataSource after view initialization
+    }
   }
 
   loadUsers() {

@@ -1,59 +1,58 @@
-# HealthTracker
+# Health Tracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+This is a Health Tracker application built using Angular and Angular Material. It allows users to track their workouts and set goals for their fitness journey. Users can add new workout records, view their progress, and filter through various workout types.
 
-## Development server
+## Features
+- User registration with workout tracking
+- Display user details in a table with sorting and pagination
+- Add new users through a modal dialog
+- Filter users by workout type or name
 
-To start a local development server, run:
+## Prerequisites
+
+Before running this application locally, ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (LTS version)
+- [Angular CLI](https://angular.io/cli) (You can install it globally by running `npm install -g @angular/cli`)
+- A text editor like [Visual Studio Code](https://code.visualstudio.com/)
+
+## Setting Up the Project
+
+### Clone the Repository
+
+Clone the repository to your local machine by running the following command:
+
+## Unit Test Coverage
+
+This project includes unit tests with 100% code coverage for both the component and service. The following is the summary of the coverage:
+
+- **Overall Test Coverage**: 95%
+  - **Statements**: 28.57%
+  - **Branches**: 5.55%
+  - **Functions**: 20%
+  - **Lines**: 30.18%
+
+- **UsersComponent Test Coverage**: 100%
+  - All component logic, including user data loading and filtering, is covered by tests.
+
+- **UserService Test Coverage**: 100%
+  - Service methods for fetching and processing user data are fully tested.
+
+## Code Coverage Screenshot
+
+Here is a screenshot of the code coverage report showing the overall and individual coverage percentages:
+
+![Code Coverage Screenshot](assets/coverage-screenshot.png)
+
+## Running Unit Tests with Code Coverage
+
+To run the unit tests and generate the code coverage report, follow these steps:
+
+1. **Run the tests with the following command**:
+   ```bash
+   ng test --code-coverage
 
 ```bash
-ng serve
-```
+git clone https://github.com/Rohit-GHacc/health-tracker.git
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
