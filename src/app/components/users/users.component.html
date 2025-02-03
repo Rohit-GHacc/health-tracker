@@ -1,6 +1,14 @@
 <div class="p-6">
+  <input
+    type="text"
+    class="mb-4 p-2 border rounded"
+    placeholder="Search by Username"
+    [(ngModel)]="searchTerm"
+    (input)="applyFilter()"
+    aria-label="Search user"
+  />
   <div class="bg-white rounded-lg shadow overflow-hidden">
-    <table mat-table [dataSource]="users" class="w-full">
+    <table mat-table [dataSource]="filteredUsers" class="w-full">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef class="bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">

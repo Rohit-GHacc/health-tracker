@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
+import { FormsModule } from '@angular/forms'; 
 interface User {
   id: string;
   name: string;
@@ -19,7 +19,8 @@ interface User {
     CommonModule,
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css'
@@ -27,6 +28,8 @@ interface User {
 export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['name', 'workouts', 'minutes', 'workoutType'];
   users: User[] = [];
+  filteredUsers: User[] = [];
+  searchTerm: string = ''; // This will hold the search term
 
   ngOnInit() {
     this.loadUsers();
@@ -41,10 +44,21 @@ export class UsersComponent implements OnInit {
             ...user,
             workoutType: Array.isArray(user.workoutType) ? user.workoutType : [user.workoutType]
           }));
+          this.filteredUsers = this.users
         }
       }
     } catch (error) {
       console.error('Error loading users:', error);
+    }
+  }
+
+  applyFilter() {
+    if (this.searchTerm.trim() === '') {
+      this.filteredUsers = this.users; // If no search term, show all users
+    } else {
+      this.filteredUsers = this.users.filter(user =>
+        user.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
     }
   }
   

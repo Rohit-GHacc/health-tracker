@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select'; // Import MatSelectModule
-import { MatOptionModule } from '@angular/material/core'; // Import MatOptionModule
+import { MatSelectModule } from '@angular/material/select'; 
+import { MatOptionModule } from '@angular/material/core'; 
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,8 +18,8 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule, // Add MatSelectModule
-    MatOptionModule // Add MatOptionModule
+    MatSelectModule, 
+    MatOptionModule 
   ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.css'
@@ -44,9 +44,8 @@ export class AddUserComponent {
       if (existingUser) {
         existingUser.goal += this.userData.goal;
   
-        // Ensure workoutType is always an array
         if (!Array.isArray(existingUser.workoutType)) {
-          existingUser.workoutType = [existingUser.workoutType]; // Convert string to array
+          existingUser.workoutType = [existingUser.workoutType]; 
         }
   
         if (!existingUser.workoutType.includes(this.userData.workoutType)) {
@@ -58,7 +57,7 @@ export class AddUserComponent {
           name: this.userData.name,
           workouts: 0,
           goal: this.userData.goal,
-          workoutType: [this.userData.workoutType] // Store as an array
+          workoutType: [this.userData.workoutType] 
         });
       }
   
